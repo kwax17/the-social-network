@@ -30,12 +30,12 @@ router
     .post(addThought);
 
 // puts reactions to thought
-// /api/comments/:thoughtId/reactions
+// /api/thoughts/:thoughtId/reactions
 router
   .route('/:thoughtId/reactions')
-  .put(addReaction)
+  .post(addReaction);
 
-// /api/comments/<pizzaId>/<commentId>/<replyId>
+// /api/thoughts/:thoughtId/reactions/:reactionId
 router
     .route('/:thoughtId/reactions/:reactionId')
     .delete(removeReaction);

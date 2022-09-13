@@ -12,11 +12,11 @@ const UserSchema = new Schema(
             type: String,
             required: true, 
             unique: true, 
-            // matching??
+            match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/]
         },
         thoughts: [{
             type: Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'Thoughts'
         }],
         friends: [{
             type: Schema.Types.ObjectId,
@@ -32,12 +32,9 @@ const UserSchema = new Schema(
     }
 );
 
-// UserSchema.virtual('commentCount').get(function() {
-//     return this.comments.reduce(
-//       (total, comment) => total + comment.replies.length + 1,
-//       0
-//     );
-//   });
+UserSchema.virtual('friendCount').get(function() {
+    return this.friends.length;
+})
 
 const User = model('User', UserSchema);
 
